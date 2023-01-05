@@ -8,5 +8,8 @@
     },
     "require-dev": {
         "tracy/tracy": "^2.9"
+    },
+    "require": {
+        "symfony/http-foundation": "^6.2"
     }
 }

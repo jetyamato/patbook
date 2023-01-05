@@ -2,12 +2,20 @@
 
 namespace Patbook;
 
-use Tracy;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Tracy\Debugger;
 
 define('ROOT_DIR', dirname(__DIR__));
 
 require ROOT_DIR . '/vendor/autoload.php';
 
-Tracy\Debugger::enable();
+Debugger::enable();
 
-echo 'Hello from the bootstrap file! :)';
+$request = Request::createFromGlobals();
+
+$content = 'Hello ' . $request->get('name', 'visitor');
+
+$response = new Response($content);
+$response->prepare($request);
+$response->send();
