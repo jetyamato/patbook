@@ -1,5 +1,7 @@
-# Part 2
+# Part 3
 
 This commit corresponds to Part 2 of the tutorial from the book.
 
-- Setup the HTTP Request and Response objects using Symfony HTTP Foundation
+- Setup the initial controller classes
+- Setup routing using FastRoute
+- Define routes file

@@ -3,13 +3,14 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Patbook\\": "src/"
+			"SocialNews\\": "src/"
         }
     },
     "require-dev": {
         "tracy/tracy": "^2.9"
     },
     "require": {
-        "symfony/http-foundation": "^6.2"
+        "symfony/http-foundation": "^6.2",
+        "nikic/fast-route": "^1.3"
     }
 }
