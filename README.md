@@ -1,7 +1,6 @@
-# Part 3
+# Part 4
 
-This commit corresponds to Part 2 of the tutorial from the book.
+This commit corresponds to Part 3 of the tutorial from the book.
 
-- Setup the initial controller classes
-- Setup routing using FastRoute
-- Define routes file
+- Setup the template rendering using Twig
+- Setup the dependency injection using Auryn

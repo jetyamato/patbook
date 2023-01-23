@@ -1,6 +1,7 @@
 <?php declare(strict_types = 1);
 
 use SocialNews\FrontPage\Presentation\FrontPageController;
+use SocialNews\Framework\Rendering\TwigTemplateRendererFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FastRoute\RouteCollector;
@@ -50,7 +51,8 @@ switch ($routeInfo[0])
 		[$controllerName, $method] = explode('#', $routeInfo[1]);
 		$vars = $routeInfo[2];
 
-		$controller = new $controllerName;
+		$injector = include('dependencies.php');
+		$controller = $injector->make($controllerName);
 		$response = $controller->$method($request, $vars);
 		break;
 }
