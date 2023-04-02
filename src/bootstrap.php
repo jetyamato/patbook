@@ -13,7 +13,7 @@ define('ROOT_DIR', dirname(__DIR__));
 
 require ROOT_DIR . '/vendor/autoload.php';
 
-Debugger::enable();
+Debugger::enable(Debugger::DEVELOPMENT);
 
 $request = Request::createFromGlobals();
 

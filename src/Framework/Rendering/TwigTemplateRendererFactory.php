@@ -7,9 +7,17 @@ use \Twig\Environment;
 
 final class TwigTemplateRendererFactory
 {
+  private $templateDirectory;
+
+  public function __construct(TemplateDirectory $templateDirectory)
+  {
+    $this->templateDirectory = $templateDirectory;
+  }
+
 	public function create(): TwigTemplateRenderer
 	{
-		$loader = new FilesystemLoader([]);
+    $templateDirectory = $this->templateDirectory->toString();
+		$loader = new FilesystemLoader([$templateDirectory]);
 		$twigEnvironment = new Environment($loader);
 		return new TwigTemplateRenderer($twigEnvironment);
 	}

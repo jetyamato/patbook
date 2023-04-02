@@ -1,6 +1,8 @@
-# Part 4
+# Part 5
 
-This commit corresponds to Part 3 of the tutorial from the book.
+This commit corresponds to Part 4 of the tutorial from the book.
 
-- Setup the template rendering using Twig
-- Setup the dependency injection using Auryn
+- Create Twig templates
+- Create value object for template directory
+- Modify the templates to be reusable
+- Added code to prevent XSS vulnerability
