@@ -25,7 +25,7 @@ final class DbalSubmissionsQuery implements SubmissionsQuery
     $qb->from('submissions');
     $qb->orderBy('creation_date', 'DESC');
 
-    $stat = $qb->execute();
+    $stat = $qb->executeQuery();
     $rows = $qb->fetchAllAssociative();
 
     $submissions = [];
