@@ -3,7 +3,8 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-			"SocialNews\\": "src/"
+			"SocialNews\\": "src/",
+      "Migrations\\": "migrations/"
         }
     },
     "require-dev": {
@@ -13,6 +14,8 @@
         "symfony/http-foundation": "^6.2",
         "nikic/fast-route": "^1.3",
         "twig/twig": "^3.5",
-        "rdlowrey/auryn": "^1.4"
+        "rdlowrey/auryn": "^1.4",
+        "doctrine/dbal": "^3.6",
+        "vlucas/phpdotenv": "^5.5"
     }
 }

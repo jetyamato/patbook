@@ -15,6 +15,9 @@ require ROOT_DIR . '/vendor/autoload.php';
 
 Debugger::enable(Debugger::DEVELOPMENT);
 
+$dotenv = Dotenv\Dotenv::createImmutable(ROOT_DIR);
+$dotenv->load();
+
 $request = Request::createFromGlobals();
 
 $dispatcher = simpleDispatcher(

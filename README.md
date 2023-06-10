@@ -1,9 +1,8 @@
-# Part 6
+# Part 7
 
-This commit corresponds to Part 5 of the tutorial from the book.
+This commit corresponds to Part 6 of the tutorial from the book.
 
-- Create Submission value object for submissions
-- Create SubmissionsQuery interface to return multiple submissions
-- Modify the FrontPageController to depend on SubmissionsQuery
-- Modify the dependency injector to use SubmissionsQuery
-- Create MockSubmissionsQuery mock object for testing Submissions value object and SubmissionsQuery interface
+- Create a PostgreSQL database and table
+- Configure the database connection via Doctrine DBAL
+- Setup a simple migration system for the database
+- Inject the DBAL into the controller
