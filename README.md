@@ -1,8 +1,9 @@
-# Part 5
+# Part 6
 
-This commit corresponds to Part 4 of the tutorial from the book.
+This commit corresponds to Part 5 of the tutorial from the book.
 
-- Create Twig templates
-- Create value object for template directory
-- Modify the templates to be reusable
-- Added code to prevent XSS vulnerability
+- Create Submission value object for submissions
+- Create SubmissionsQuery interface to return multiple submissions
+- Modify the FrontPageController to depend on SubmissionsQuery
+- Modify the dependency injector to use SubmissionsQuery
+- Create MockSubmissionsQuery mock object for testing Submissions value object and SubmissionsQuery interface
