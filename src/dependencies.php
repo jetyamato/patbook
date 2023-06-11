@@ -9,6 +9,10 @@ use SocialNews\FrontPage\Infrastructure\DbalSubmissionsQuery;
 use Doctrine\DBAL\Connection;
 use SocialNews\Framework\Dbal\ConnectionFactory;
 use SocialNews\Framework\Dbal\DatabaseUrl;
+use SocialNews\Framework\Csrf\TokenStorage;
+use SocialNews\Framework\Csrf\SymfonySessionTokenStorage;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 $injector = new Injector();
 
@@ -40,5 +44,9 @@ $injector->delegate(
 );
 
 $injector->share(Connection::class);
+
+$injector->alias(TokenStorage::class, SymfonySessionTokenStorage::class);
+
+$injector->alias(SessionInterface::class, Session::class);
 
 return $injector;
