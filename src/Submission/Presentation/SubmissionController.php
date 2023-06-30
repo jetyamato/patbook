@@ -7,25 +7,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use SocialNews\Framework\Rendering\TemplateRenderer;
-use SocialNews\Framework\Csrf\StoredTokenValidator;
-use SocialNews\Framework\Csrf\Token;
+use SocialNews\Submission\Application\SubmitLinkHandler;
 
 final class SubmissionController
 {
   private $templateRenderer;
-  private $storedTokenValidator;
+  private $submissionFormFactory;
   private $session;
+  private $submitLinkHandler;
 
   public function __construct
   (
     TemplateRenderer $templateRenderer,
-    StoredTokenValidator $storedTokenValidator,
-    Session $session
+    SubmissionFormFactory $submissionFormFactory,
+    Session $session,
+    SubmitLinkHandler $submitLinkHandler
   )
   {
     $this->templateRenderer = $templateRenderer;
-    $this->storedTokenValidator = $storedTokenValidator;
+    $this->submissionFormFactory = $submissionFormFactory;
     $this->session = $session;
+    $this->submitLinkHandler = $submitLinkHandler;
   }
 
 	public function show(): Response
@@ -38,18 +40,17 @@ final class SubmissionController
   {
     $response = new RedirectResponse('/submit');
 
-    if (!$this->storedTokenValidator->validate
-      (
-        'submission',
-        new Token((string)$request->get('token'))
-      )
-    )
+    $form = $this->submissionFormFactory->createFromRequest($request);
+    if ($form->hasValidationErrors())
     {
-      $this->session->getFlashBag()->add('errors', 'Invalid token');
+      foreach ($form->getValidationErrors() as $errorMessage)
+      {
+        $this->session->getFlashBag()->add('errors', $errorMessage);
+      }
       return $response;
     }
 
-    // save the submission...
+    $this->submitLinkHandler->handle($form->toCommand());
     
     $this->session->getFlashBag()->add('success', 'Your URL was submitted successfully');
     return $response;

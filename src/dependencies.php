@@ -1,6 +1,8 @@
 <?php declare(strict_types = 1);
 
 use Auryn\Injector;
+use SocialNews\Submission\Domain\SubmissionRepository;
+use SocialNews\Submission\Infrastructure\DbalSubmissionRepository;
 use SocialNews\Framework\Rendering\TemplateRenderer;
 use SocialNews\Framework\Rendering\TwigTemplateRendererFactory;
 use SocialNews\Framework\Rendering\TemplateDirectory;
@@ -31,7 +33,7 @@ $injector->share(SubmissionsQuery::class);
 $injector->define(TemplateDirectory::class, [':rootDirectory' => ROOT_DIR]);
 
 $injector->define(
-  DatabaseUrl::class, [':url' => 'pdo-pgsql://'.$_ENV['DB_USER'].':'.$_ENV['DB_PASS'].'@127.0.0.1:5432/patbook?charset=utf8']
+  DatabaseUrl::class, [':url' => 'pdo-mysql://'.$_ENV['DB_USER'].':'.$_ENV['DB_PASS'].'@127.0.0.1:3306/patbook?charset=utf8']
 );
 
 $injector->delegate(
@@ -48,5 +50,7 @@ $injector->share(Connection::class);
 $injector->alias(TokenStorage::class, SymfonySessionTokenStorage::class);
 
 $injector->alias(SessionInterface::class, Session::class);
+
+$injector->alias(SubmissionRepository::class, DbalSubmissionRepository::class);
 
 return $injector;
