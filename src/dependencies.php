@@ -1,6 +1,13 @@
 <?php declare(strict_types = 1);
 
 use Auryn\Injector;
+use Doctrine\DBAL\Connection;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use SocialNews\User\Domain\UserRepository;
+use SocialNews\User\Infrastructure\DbalUserRepository;
+use SocialNews\User\Application\NicknameTakenQuery;
+use SocialNews\User\Infrastructure\DbalNicknameTakenQuery;
 use SocialNews\Submission\Domain\SubmissionRepository;
 use SocialNews\Submission\Infrastructure\DbalSubmissionRepository;
 use SocialNews\Framework\Rendering\TemplateRenderer;
@@ -8,13 +15,10 @@ use SocialNews\Framework\Rendering\TwigTemplateRendererFactory;
 use SocialNews\Framework\Rendering\TemplateDirectory;
 use SocialNews\FrontPage\Application\SubmissionsQuery;
 use SocialNews\FrontPage\Infrastructure\DbalSubmissionsQuery;
-use Doctrine\DBAL\Connection;
 use SocialNews\Framework\Dbal\ConnectionFactory;
 use SocialNews\Framework\Dbal\DatabaseUrl;
 use SocialNews\Framework\Csrf\TokenStorage;
 use SocialNews\Framework\Csrf\SymfonySessionTokenStorage;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 $injector = new Injector();
 
@@ -52,5 +56,9 @@ $injector->alias(TokenStorage::class, SymfonySessionTokenStorage::class);
 $injector->alias(SessionInterface::class, Session::class);
 
 $injector->alias(SubmissionRepository::class, DbalSubmissionRepository::class);
+
+$injector->alias(UserRepository::class, DbalUserRepository::class);
+
+$injector->alias(NicknameTakenQuery::class, DbalNicknameTakenQuery::class);
 
 return $injector;
